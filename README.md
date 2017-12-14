@@ -42,7 +42,11 @@ If you run traefik you can add the following docker compose and it will allow yo
     # add this for some basic auth settings
       - "traefik.frontend.auth.basic={{ nuget_basic_auth }}"
 ```
+# Env variables
 
+* NUGET_HOST=localhost `Allow host override`
+* NUGET_API_KEY=e46c582041db4cbe86a84b76a374383a `The api key override`
+* NUGET_DEFAULT_HTTP=https `Allowes forcing https`
 
 # using the nuget as source
 
