@@ -9,6 +9,7 @@ RUN apt-get install --no-install-recommends -y  nano curl mc
 ENV NUGET_PATH=/app
 ENV NUGET_HOST=localhost
 ENV NUGET_API_KEY=e46c582041db4cbe86a84b76a374383a
+ENV NUGET_DEFAULT_HTTP=http
 
 
 RUN git clone https://github.com/rolfwessels/simple-nuget-server.git $NUGET_PATH && \
@@ -27,9 +28,10 @@ RUN sed -i -- 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.0/fpm/php.
 RUN sed -i -- 's/;listen.mode = .*/listen.mode = 0660/g' /etc/php/7.0/fpm/pool.d/www.conf && \
     cat /etc/php/7.0/fpm/pool.d/www.conf | grep listen.
 
-COPY init.sh /
 RUN usermod -G www-data nginx
 RUN nginx -t
+
+COPY init.sh /
 EXPOSE 80
 VOLUME ["app/db","app/packagefiles"]
 CMD ["sh", "init.sh"]
