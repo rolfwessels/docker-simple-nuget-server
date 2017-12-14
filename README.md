@@ -43,6 +43,18 @@ If you run traefik you can add the following docker compose and it will allow yo
       - "traefik.frontend.auth.basic={{ nuget_basic_auth }}"
 ```
 
+
+# using the nuget as source
+
+Run the following command in the folder where your sln file is.
+
+`./.nuget/nuget sources Add -Name "myhostname" -Source https://nuget.myhostname.com  .\nuget.config`
+
+If you have traefic with basic auth setup
+
+`./.nuget/nuget sources Add -Name "myhostname" -Source https://nuget.myhostname.com -UserName user -Password xxxxxxx .\nuget.config`
+
+
 # For developers
 
 ```
