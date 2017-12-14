@@ -1,0 +1,28 @@
+sudo: required
+dist: trusty
+
+services:
+  - docker
+
+addons:
+  apt:
+    packages:
+    - gettext
+    - libcurl4-openssl-dev
+    - libicu-dev
+    - libssl-dev
+    - libunwind8
+    - zlib1g
+    - curl
+
+script:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker build -t rolfwessels/docker-simple-nuget-server:latest -t rolfwessels/docker-simple-nuget-server:v1.1.$TRAVIS_BUILD_NUMBER .;
+    else
+    docker build -t rolfwessels/docker-simple-nuget-server:v1.1.$TRAVIS_BUILD_NUMBER-develop .;
+    fi
+ 
+after_success:
+  - popd
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker push rolfwessels/docker-simple-nuget-server
