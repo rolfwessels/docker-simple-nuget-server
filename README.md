@@ -16,7 +16,7 @@ curl https://get.docker.com | sh
 # run
 docker run --name docker-simple-nuget-server \
            -e 'NUGET_API_KEY=e46c582041db4cbe86a84b76a374383a' \
-           -e 'NUGET_HOST=myhostname.com' \
+           -e 'NUGET_HOST=nuget.myhostname.com' \
            -p 8083:80 \
            rolfwessels/docker-simple-nuget-server:latest 
 ```
@@ -34,8 +34,8 @@ If you run traefik you can add the following docker compose and it will allow yo
       NUGET_API_KEY: "{{ nuget_api_key }}"
       NUGET_HOST: "nuget.{{ mon_url }}"
     volumes:
-      - /data/nuget/database:/var/www/db
-      - /data/nuget/packages:/var/www/packagefiles
+      - /data/nuget/database:/app/db
+      - /data/nuget/packages:/app/packagefiles
     labels:
       - "traefik.enable=true"
       - "traefik.frontend.rule=Host:nuget.{{ mon_url }}" 
