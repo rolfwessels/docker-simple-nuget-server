@@ -52,11 +52,11 @@ If you run traefik you can add the following docker compose and it will allow yo
 
 Run the following command in the folder where your sln file is.
 
-`./.nuget/nuget sources Add -Name "myhostname" -Source https://nuget.myhostname.com  .\nuget.config`
+`./.nuget/nuget sources Add -Name "myhostname" -Source https://nuget.myhostname.com   -ConfigFile NuGet.Config`
 
 If you have traefic with basic auth setup
 
-`./.nuget/nuget sources Add -Name "myhostname" -Source https://nuget.myhostname.com -UserName user -Password xxxxxxx .\nuget.config`
+`./.nuget/nuget sources Add -Name "myhostname" -Source https://nuget.myhostname.com -UserName user -Password xxxxxxx  -ConfigFile nuget.config`
 
 
 # For developers
