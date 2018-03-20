@@ -18,8 +18,8 @@ addons:
 script:
  
   - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
-  - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH $TRAVIS_PULL_REQUEST"
-  - if [ "$TRAVIS_BRANCH" == "master" AND "$TRAVIS_PULL_REQUEST" == "false" ]; then
+  - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH  PR=$TRAVIS_PULL_REQUEST"
+  - if [ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]; then
     docker build -t rolfwessels/docker-simple-nuget-server:latest -t rolfwessels/docker-simple-nuget-server:v1.1.$TRAVIS_BUILD_NUMBER .;
     else
     docker build -t rolfwessels/docker-simple-nuget-server:v1.1.$TRAVIS_BUILD_NUMBER-develop .;
@@ -27,7 +27,7 @@ script:
  
 after_success:
   - popd
-  - if [ "$TRAVIS_BRANCH" == "master" AND "$TRAVIS_PULL_REQUEST" == "false" ]; then
+  - if [ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]; then
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
     docker push rolfwessels/docker-simple-nuget-server
     fi
