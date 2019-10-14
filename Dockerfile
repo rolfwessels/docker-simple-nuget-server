@@ -39,6 +39,6 @@ RUN nginx -t
 
 COPY init.sh /
 EXPOSE 80
-VOLUME ["app/db","app/packagefiles"]
+VOLUME ["/app/db","/app/packagefiles"]
 CMD ["sh", "init.sh"]
 
