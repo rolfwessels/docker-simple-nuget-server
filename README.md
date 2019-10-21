@@ -6,7 +6,6 @@
 
 Docker file and auto building of simple-nuget-server (https://github.com/Daniel15/simple-nuget-server)
 
-
 # To run on server
 
 ```
@@ -18,7 +17,7 @@ docker run --name docker-simple-nuget-server \
            -e 'NUGET_API_KEY=e46c582041db4cbe86a84b76a374383a' \
            -e 'NUGET_HOST=nuget.myhostname.com' \
            -p 8083:80 \
-           rolfwessels/docker-simple-nuget-server:latest 
+           rolfwessels/docker-simple-nuget-server:latest
 ```
 
 # using docker compose
@@ -38,26 +37,26 @@ If you run traefik you can add the following docker compose and it will allow yo
       - /data/nuget/packages:/app/packagefiles
     labels:
       - "traefik.enable=true"
-      - "traefik.frontend.rule=Host:nuget.{{ mon_url }}" 
+      - "traefik.frontend.rule=Host:nuget.{{ mon_url }}"
     # add this for some basic auth settings
       - "traefik.frontend.auth.basic={{ nuget_basic_auth }}"
 ```
+
 # Env variables
 
-* NUGET_HOST=localhost `Allow host override`
-* NUGET_API_KEY=e46c582041db4cbe86a84b76a374383a `The api key override`
-* NUGET_DEFAULT_HTTP=https `Allowes forcing https`
+- NUGET_HOST=localhost `Allow host override`
+- NUGET_API_KEY=e46c582041db4cbe86a84b76a374383a `The api key override`
+- NUGET_DEFAULT_HTTP=https `Allowes forcing https`
 
 # using the nuget as source
 
 Run the following command in the folder where your sln file is.
 
-`./.nuget/nuget sources Add -Name "myhostname" -Source https://nuget.myhostname.com   -ConfigFile NuGet.Config`
+`./.nuget/nuget sources Add -Name "myhostname" -Source https://nuget.myhostname.com -ConfigFile NuGet.Config`
 
 If you have traefic with basic auth setup
 
-`./.nuget/nuget sources Add -Name "myhostname" -Source https://nuget.myhostname.com -UserName user -Password xxxxxxx  -ConfigFile nuget.config`
-
+`./.nuget/nuget sources Add -Name "myhostname" -Source https://nuget.myhostname.com -UserName user -Password xxxxxxx -ConfigFile nuget.config`
 
 # For developers
 
@@ -71,10 +70,10 @@ sh docker_build.sh
 # to run the image for debugging
 sh docker_run.sh
 
-#on windows machine 
+#on windows machine
 test.cmd http://192.168.1.250:8083/ e46c582041db4cbe86a84b76a374383a
 ```
 
-
 ## Note:
+
 I tried https://github.com/sunsided/docker-nuget but had issues with the base url. Unfortuately this repo is not being maintained and I was unable to get it up and running again.
