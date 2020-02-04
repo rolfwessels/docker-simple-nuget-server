@@ -17,6 +17,7 @@ curl https://get.docker.com | sh
 docker run --name docker-simple-nuget-server \
            -e 'NUGET_API_KEY=e46c582041db4cbe86a84b76a374383a' \
            -e 'NUGET_HOST=nuget.myhostname.com' \
+           -e 'NUGET_UPLOAD_MAX_SIZE=20M' \
            -p 8083:80 \
            rolfwessels/docker-simple-nuget-server:latest 
 ```
@@ -33,6 +34,7 @@ If you run traefik you can add the following docker compose and it will allow yo
     environment:
       NUGET_API_KEY: "{{ nuget_api_key }}"
       NUGET_HOST: "nuget.{{ mon_url }}"
+      NUGET_UPLOAD_MAX_SIZE:"{{ nuget_package_size}}"
     volumes:
       - /data/nuget/database:/app/db
       - /data/nuget/packages:/app/packagefiles
